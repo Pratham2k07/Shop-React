@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './Products.css';
 
 const productsList = [
@@ -6,67 +7,73 @@ const productsList = [
     id: 1, 
     name: 'Bedsheets', 
     description: 'Premium cotton and silk blend bedsheets.',
+    coverImage: '/cotton_bedsheets.jpg',
     varieties: [
-      { name: 'Cotton Bedsheets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Cotton+Bedsheets' },
-      { name: 'Silk Bedsheets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Silk+Bedsheets' },
-      { name: 'Printed Bedsheets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Printed+Bedsheets' },
-      { name: 'King Size Bedsheets', image: 'https://placehold.co/400x300/141414/D4AF37?text=King+Size' },
-      { name: 'Queen Size Bedsheets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Queen+Size' }
+      { name: 'Cotton Bedsheets', image: '/cotton_bedsheets.jpg' },
+      { name: 'Silk Bedsheets', image: '/silk_bedsheets.jpg' },
+      { name: 'Printed Bedsheets', image: '/printed_bedsheets.jpg' },
+      { name: 'King Size Bedsheets', image: '/king_bedsheets.jpg' },
+      { name: 'Queen Size Bedsheets', image: '/queen_bedsheets.jpg' }
     ]
   },
   { 
     id: 2, 
     name: 'Curtains', 
     description: 'Elegant curtains to enhance your room aesthetic.',
+    coverImage: '/curtains_cover.jpg',
     varieties: [
-      { name: 'Blackout Curtains', image: 'https://placehold.co/400x300/141414/D4AF37?text=Blackout' },
-      { name: 'Sheer Curtains', image: 'https://placehold.co/400x300/141414/D4AF37?text=Sheer' },
-      { name: 'Printed Curtains', image: 'https://placehold.co/400x300/141414/D4AF37?text=Printed' },
-      { name: 'Linen Curtains', image: 'https://placehold.co/400x300/141414/D4AF37?text=Linen' }
+      { name: 'Blackout Curtains', image: '/blackout_curtains.jpg' },
+      { name: 'Sheer Curtains', image: '/sheer_curtains.jpg' },
+      { name: 'Printed Curtains', image: '/printed_curtains.jpg' },
+      { name: 'Linen Curtains', image: '/linen_curtains.jpg' }
     ]
   },
   { 
     id: 3, 
     name: 'Sofas', 
     description: 'Premium textiled sofas for elegant living spaces.',
+    coverImage: '/sofas_cover.jpg',
     varieties: [
-      { name: '2-Seater Sofa', image: 'https://placehold.co/400x300/141414/D4AF37?text=2-Seater' },
-      { name: '3-Seater Sofa', image: 'https://placehold.co/400x300/141414/D4AF37?text=3-Seater' },
-      { name: 'L-Shaped Sofa', image: 'https://placehold.co/400x300/141414/D4AF37?text=L-Shaped' },
-      { name: 'Luxury Sofa', image: 'https://placehold.co/400x300/141414/D4AF37?text=Luxury' }
+      { name: '2-Seater Sofa', image: '/sofa_2_seater.jpg' },
+      { name: '3-Seater Sofa', image: '/sofa_3_seater.jpg' },
+      { name: 'L-Shaped Sofa', image: '/sofa_l_shaped.jpg' },
+      { name: 'Luxury Sofa', image: '/sofa_luxury.jpg' }
     ]
   },
   { 
     id: 4, 
     name: 'Blankets', 
     description: 'Soft, warm and luxurious blankets for cozy nights.',
+    coverImage: '/blankets_cover.jpg',
     varieties: [
-      { name: 'Fleece Blankets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Fleece' },
-      { name: 'Woolen Blankets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Woolen' },
-      { name: 'Weighted Blankets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Weighted' },
-      { name: 'Mink Blankets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Mink' }
+      { name: 'Fleece Blankets', image: '/fleece_blanket.jpg' },
+      { name: 'Woolen Blankets', image: '/woolen_blanket.jpg' },
+      { name: 'Weighted Blankets', image: '/weighted_blanket.jpg' },
+      { name: 'Mink Blankets', image: '/mink_blanket.jpg' }
     ]
   },
   { 
     id: 5, 
     name: 'Towels', 
     description: 'Highly absorbent, plush towels for everyday use.',
+    coverImage: '/towels_cover.jpg',
     varieties: [
-      { name: 'Bath Towels', image: 'https://placehold.co/400x300/141414/D4AF37?text=Bath+Towels' },
-      { name: 'Hand Towels', image: 'https://placehold.co/400x300/141414/D4AF37?text=Hand+Towels' },
-      { name: 'Face Towels', image: 'https://placehold.co/400x300/141414/D4AF37?text=Face+Towels' },
-      { name: 'Beach Towels', image: 'https://placehold.co/400x300/141414/D4AF37?text=Beach+Towels' }
+      { name: 'Bath Towels', image: '/bath_towels.jpg' },
+      { name: 'Hand Towels', image: '/hand_towels.jpg' },
+      { name: 'Face Towels', image: '/face_towels.jpg' },
+      { name: 'Beach Towels', image: '/beach_towels.jpg' }
     ]
   },
   { 
     id: 6, 
     name: 'Home Decor', 
     description: 'Unique home furnishing items to complete your space.',
+    coverImage: '/home_decor_cover.jpg',
     varieties: [
-      { name: 'Vases', image: 'https://placehold.co/400x300/141414/D4AF37?text=Vases' },
-      { name: 'Wall Art', image: 'https://placehold.co/400x300/141414/D4AF37?text=Wall+Art' },
-      { name: 'Cushion Covers', image: 'https://placehold.co/400x300/141414/D4AF37?text=Cushion+Covers' },
-      { name: 'Rugs & Carpets', image: 'https://placehold.co/400x300/141414/D4AF37?text=Rugs' }
+      { name: 'Vases', image: '/luxury_vase.jpg' },
+      { name: 'Wall Art', image: '/wall_art.jpg' },
+      { name: 'Decorative Mirrors', image: '/mirror.jpg' },
+      { name: 'Lamps', image: '/lamp.jpg' }
     ]
   }
 ];
@@ -76,9 +83,22 @@ const Products = () => {
 
   // Prevent background scrolling and initialize Swiper
   useEffect(() => {
+    let scrollTimer;
+    let swiperTimer;
+
     if (selectedProduct) {
-      document.body.style.overflow = 'hidden';
-      const timer = setTimeout(() => {
+      // Scroll the window to the top of the products section
+      const productsSection = document.getElementById('products');
+      if (productsSection) {
+        productsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // Delay blocking the body scroll to let smooth scroll complete
+      scrollTimer = setTimeout(() => {
+        document.body.style.overflow = 'hidden';
+      }, 500);
+
+      swiperTimer = setTimeout(() => {
         if (window.Swiper) {
           new window.Swiper('.mySwiper', {
             effect: 'coverflow',
@@ -101,11 +121,15 @@ const Products = () => {
           });
         }
       }, 50);
-      return () => clearTimeout(timer);
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => { document.body.style.overflow = 'unset'; };
+
+    return () => {
+      clearTimeout(scrollTimer);
+      clearTimeout(swiperTimer);
+      document.body.style.overflow = 'unset';
+    };
   }, [selectedProduct]);
 
   return (
@@ -120,9 +144,16 @@ const Products = () => {
               onClick={() => setSelectedProduct(product)}
             >
               <div className="product-image">
-                <div className="image-placeholder">
-                  [{product.name} Image]
-                </div>
+                <div 
+                  className="category-cover-blur"
+                  style={{ backgroundImage: `url(${product.coverImage})` }}
+                ></div>
+                <img 
+                  src={product.coverImage} 
+                  alt={product.name} 
+                  className="category-cover-img"
+                  loading="lazy"
+                />
               </div>
               <div className="product-info">
                 <h3>{product.name}</h3>
@@ -134,7 +165,7 @@ const Products = () => {
       </div>
 
       {/* Cinematic Modal Popup */}
-      {selectedProduct && (
+      {selectedProduct && createPortal(
         <div className="cinematic-overlay" onClick={() => setSelectedProduct(null)}>
           <div className="cinematic-modal" onClick={e => e.stopPropagation()}>
             <button 
@@ -154,6 +185,10 @@ const Products = () => {
                 {selectedProduct.varieties.map((variety, index) => (
                   <div key={index} className="swiper-slide cinematic-slide">
                     <div 
+                      className="cinematic-card-blur-bg" 
+                      style={{ backgroundImage: `url(${variety.image})` }}
+                    ></div>
+                    <div 
                       className="cinematic-card-bg" 
                       style={{ backgroundImage: `url(${variety.image})` }}
                     ></div>
@@ -167,7 +202,8 @@ const Products = () => {
               <div className="swiper-button-prev cinematic-nav"></div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   );
